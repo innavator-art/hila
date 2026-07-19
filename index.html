@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hila Haimovich — Chinese Medicine Therapist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Work+Sans:wght@400;500;600&family=Noto+Sans+Hebrew:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --forest: #2d4a3e;
+      --sage: #7a9e84;
+      --sage-light: #c5d6c8;
+      --cream: #f7f5f0;
+      --sand: #f0ece3;
+      --terracotta: #b87d62;
+      --charcoal: #2c2c2c;
+      --muted: #6b6b6b;
+      --white: #ffffff;
+      --gold: #c9a04f;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Work Sans', 'Noto Sans Hebrew', 'Segoe UI', sans-serif;
+      color: var(--charcoal);
+      background-color: var(--cream);
+      line-height: 1.8;
+    }
+
+    h1, h2, h3, .logo {
+      font-family: 'Cormorant Garamond', 'Noto Sans Hebrew', Georgia, serif;
+    }
+
+    .bg-decor {
+      position: fixed;
+      top: 0;
+      right: -60px;
+      height: 100vh;
+      width: auto;
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--forest);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--charcoal);
+      font-size: 0.95rem;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--terracotta);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: var(--forest);
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .lang-switch button {
+      background: transparent;
+      border: 1px solid var(--sage);
+      color: var(--forest);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .lang-switch button:hover,
+    .lang-switch button.active {
+      background: var(--sage);
+      color: var(--white);
+    }
+
+    section {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 3rem;
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(122,158,132,0.18) 0%, rgba(247,245,240,0) 70%);
+      border-radius: 50%;
+      z-index: -1;
+    }
+
+    .hero-text {
+      flex: 1 1 420px;
+      animation: fadeUp 1s ease both;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--terracotta);
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero h1 {
+      font-size: 3.4rem;
+      color: var(--forest);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--forest), #4a6b56);
+      color: var(--white);
+      padding: 0.95rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 8px 22px rgba(45, 74, 62, 0.28);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(45, 74, 62, 0.32);
+    }
+
+    .hero-photo {
+      flex: 0 0 320px;
+      max-width: 360px;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+
+    .photo-wrap {
+      position: relative;
+      border-radius: 60% 40% 55% 45% / 55% 45% 60% 40%;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(45, 74, 62, 0.18);
+      background: linear-gradient(135deg, var(--sage-light), var(--sage));
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    h2 {
+      font-size: 2.4rem;
+      color: var(--forest);
+      text-align: center;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-lead {
+      text-align: center;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 3rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin-top: 2rem;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 2rem;
+      border-top: 4px solid var(--sage);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.09);
+    }
+
+    .service-card h3 {
+      color: var(--forest);
+      margin-bottom: 0.6rem;
+      font-size: 1.5rem;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 1rem;
+      color: var(--sage);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin-top: 2rem;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 2rem;
+      border-top: 4px solid var(--sage-light);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    .stars {
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-text {
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+    }
+
+    .testimonial-name {
+      color: var(--forest);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .booking-section {
+      background: var(--sand);
+      border-radius: 24px;
+    }
+
+    form {
+      background: var(--white);
+      padding: 2.4rem;
+      border-radius: 22px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.07);
+      display: grid;
+      gap: 1.2rem;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--forest);
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1.5px solid #dcdcdc;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 1rem;
+      background: #fafafa;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--sage);
+      background: var(--white);
+      box-shadow: 0 0 0 4px rgba(122, 158, 132, 0.12);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    button[type="submit"] {
+      background: linear-gradient(135deg, var(--forest), #4a6b56);
+      color: var(--white);
+      border: none;
+      padding: 1rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(45, 74, 62, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(45, 74, 62, 0.32);
+    }
+
+    .contact-info {
+      text-align: center;
+      font-size: 1.05rem;
+    }
+
+    .contact-info p {
+      margin: 0.6rem 0;
+      color: var(--muted);
+    }
+
+    .contact-info a {
+      color: var(--forest);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .contact-info a:hover {
+      border-bottom-color: var(--sage);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--cream);
+      background: var(--forest);
+      font-size: 0.9rem;
+    }
+
+    html[dir="rtl"] .hero {
+      flex-direction: row-reverse;
+    }
+
+    html[dir="rtl"] .hero-text,
+    html[dir="rtl"] .section-lead,
+    html[dir="rtl"] .contact-info,
+    html[dir="rtl"] .testimonial-card {
+      text-align: right;
+    }
+
+    html[dir="rtl"] .hero p {
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    html[dir="rtl"] .stars {
+      direction: ltr;
+      display: inline-block;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 760px) {
+      .hero h1 { font-size: 2.4rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.85rem; }
+      .hero { padding-top: 4rem; padding-bottom: 4rem; }
+      section { padding: 3.5rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <svg class="bg-decor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 800" preserveAspectRatio="xMaxYMid meet" aria-hidden="true">
+    <g fill="none" stroke="#2d4a3e" stroke-width="3" stroke-linecap="round" stroke-opacity="0.12">
+      <path d="M120 820 Q135 600 120 500 Q110 380 130 260 Q140 120 125 0" />
+      <path d="M210 820 Q195 620 215 520 Q225 400 205 260 Q190 120 210 0" />
+      <path d="M300 820 Q280 650 305 520 Q320 400 285 260 Q270 130 300 0" />
+    </g>
+    <g fill="#2d4a3e" fill-opacity="0.16">
+      <ellipse cx="95" cy="480" rx="38" ry="9" transform="rotate(-30 95 480)" />
+      <ellipse cx="165" cy="430" rx="40" ry="9" transform="rotate(25 165 430)" />
+      <ellipse cx="255" cy="360" rx="40" ry="9" transform="rotate(-28 255 360)" />
+      <ellipse cx="340" cy="300" rx="38" ry="9" transform="rotate(28 340 300)" />
+      <ellipse cx="110" cy="260" rx="38" ry="9" transform="rotate(-25 110 260)" />
+      <ellipse cx="200" cy="180" rx="40" ry="9" transform="rotate(24 200 180)" />
+      <ellipse cx="285" cy="120" rx="38" ry="9" transform="rotate(-26 285 120)" />
+    </g>
+  </svg>
+
+  <header>
+    <nav>
+      <div class="logo">Hila Haimovich</div>
+      <div class="nav-links">
+        <a href="#about" data-i18n="nav_about">About</a>
+        <a href="#services" data-i18n="nav_services">Services</a>
+        <a href="#testimonials" data-i18n="nav_testimonials">Reviews</a>
+        <a href="#booking" data-i18n="nav_book">Book</a>
+        <a href="#contact" data-i18n="nav_contact">Contact</a>
+      </div>
+      <div class="lang-switch" aria-label="Select language">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="ru">RU</button>
+        <button data-lang="he">HE</button>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <span class="eyebrow" data-i18n="hero_eyebrow">Healing from within</span>
+      <h1 data-i18n="hero_name">Hila Haimovich</h1>
+      <p data-i18n="hero_tagline">Chinese Medicine Therapist — compassionate, holistic care for body and mind.</p>
+      <a href="#booking" class="btn" data-i18n="hero_cta">Book an appointment</a>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-wrap">
+        <img src="hila1.jpg" alt="Hila Haimovich" />
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 data-i18n="about_title">About Hila</h2>
+    <p class="section-lead" data-i18n="about_lead">Welcome to the practice of Hila Haimovich, a dedicated Chinese medicine therapist.</p>
+    <p data-i18n="about_p1">[Replace this paragraph with Hila's bio, training, approach, and philosophy.]</p>
+  </section>
+
+  <section id="services">
+    <h2 data-i18n="services_title">Treatments</h2>
+    <p class="section-lead" data-i18n="services_lead">Personalized sessions rooted in traditional Chinese medicine.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="10" x2="18" y2="54" />
+          <line x1="32" y1="10" x2="32" y2="54" />
+          <line x1="46" y1="10" x2="46" y2="54" />
+          <circle cx="18" cy="8" r="2.5" fill="currentColor" />
+          <circle cx="32" cy="8" r="2.5" fill="currentColor" />
+          <circle cx="46" cy="8" r="2.5" fill="currentColor" />
+        </svg>
+        <h3 data-i18n="svc_acu">Acupuncture</h3>
+        <p data-i18n="svc_acu_desc">[Description of acupuncture treatment and benefits.]</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M32 6 C50 22 50 42 32 58 C14 42 14 22 32 6 Z" />
+          <line x1="32" y1="18" x2="32" y2="50" />
+          <path d="M32 26 L20 22 M32 34 L44 30 M32 42 L22 40" />
+        </svg>
+        <h3 data-i18n="svc_herb">Herbal Medicine</h3>
+        <p data-i18n="svc_herb_desc">[Description of herbal consultations and custom formulas.]</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M16 44 C16 54 48 54 48 44 L46 28 H18 Z" />
+          <path d="M24 28 C20 20 30 16 32 22 C34 16 44 20 40 28" />
+          <line x1="32" y1="22" x2="32" y2="12" />
+        </svg>
+        <h3 data-i18n="svc_cup">Cupping & Tui Na</h3>
+        <p data-i18n="svc_cup_desc">[Description of bodywork therapies offered.]</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <h2 data-i18n="testimonials_title">What clients say</h2>
+    <p class="section-lead" data-i18n="testimonials_lead">Words from people who have experienced Hila's care.</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text" data-i18n="t1_text">Hila's treatments helped me relieve years of tension and improve my sleep. The sessions are gentle, professional and deeply relaxing.</p>
+        <p class="testimonial-name"><strong data-i18n="t1_name">Anna K.</strong> &mdash; <span data-i18n="t1_role">Patient</span></p>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text" data-i18n="t2_text">I came for chronic back pain and noticed real improvement after just a few visits. Highly recommended.</p>
+        <p class="testimonial-name"><strong data-i18n="t2_name">David R.</strong> &mdash; <span data-i18n="t2_role">Patient</span></p>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text" data-i18n="t3_text">The herbal consultation gave me a clear, natural path to better digestion and energy. Thank you, Hila!</p>
+        <p class="testimonial-name"><strong data-i18n="t3_name">Maya S.</strong> &mdash; <span data-i18n="t3_role">Patient</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="booking" class="booking-section">
+    <h2 data-i18n="booking_title">Book an Appointment</h2>
+    <p class="section-lead" data-i18n="booking_lead">Send a request and Hila will get back to you to confirm.</p>
+    <form id="booking-form" onsubmit="return sendBooking();">
+      <div class="form-row">
+        <div>
+          <label for="name" data-i18n="label_name">Full name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div>
+          <label for="phone" data-i18n="label_phone">Phone number</label>
+          <input type="tel" id="phone" name="phone" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div>
+          <label for="email" data-i18n="label_email">Email</label>
+          <input type="email" id="email" name="email" />
+        </div>
+        <div>
+          <label for="date" data-i18n="label_date">Preferred date</label>
+          <input type="date" id="date" name="date" />
+        </div>
+      </div>
+
+      <div>
+        <label for="message" data-i18n="label_message">Message</label>
+        <textarea id="message" name="message" data-i18n-placeholder="message_placeholder" placeholder="What would you like help with?"></textarea>
+      </div>
+
+      <button type="submit" data-i18n="submit_btn">Request appointment</button>
+    </form>
+    <p style="text-align:center; margin-top:1.2rem; font-size:0.9rem; color:var(--muted);" data-i18n="form_note">
+      This form opens your email client. Update the email address inside the form settings with Hila's real email.
+    </p>
+  </section>
+
+  <section id="contact">
+    <h2 data-i18n="contact_title">Contact</h2>
+    <div class="contact-info">
+      <p><strong data-i18n="email_label">Email:</strong> <a href="mailto:hila@example.com" data-i18n="email_value">hila@example.com</a></p>
+      <p><strong data-i18n="phone_label">Phone:</strong> <a href="tel:+0000000000" data-i18n="phone_value">+00 000 000 0000</a></p>
+      <p><strong data-i18n="address_label">Address / clinic:</strong> <span data-i18n="address_value">[Clinic address or city]</span></p>
+    </div>
+  </section>
+
+  <footer data-i18n="footer">
+    &copy; 2026 Hila Haimovich. All rights reserved.
+  </footer>
+
+  <script>
+    const i18n = {
+      en: {
+        nav_about: "About",
+        nav_services: "Services",
+        nav_testimonials: "Reviews",
+        nav_book: "Book",
+        nav_contact: "Contact",
+        hero_name: "Hila Haimovich",
+        hero_eyebrow: "Healing from within",
+        hero_tagline: "Chinese Medicine Therapist — compassionate, holistic care for body and mind.",
+        hero_cta: "Book an appointment",
+        about_title: "About Hila",
+        about_lead: "Welcome to the practice of Hila Haimovich, a dedicated Chinese medicine therapist.",
+        about_p1: "[Replace this paragraph with Hila's bio, training, approach, and philosophy.]",
+        services_title: "Treatments",
+        services_lead: "Personalized sessions rooted in traditional Chinese medicine.",
+        svc_acu: "Acupuncture",
+        svc_acu_desc: "[Description of acupuncture treatment and benefits.]",
+        svc_herb: "Herbal Medicine",
+        svc_herb_desc: "[Description of herbal consultations and custom formulas.]",
+        svc_cup: "Cupping & Tui Na",
+        svc_cup_desc: "[Description of bodywork therapies offered.]",
+        testimonials_title: "What clients say",
+        testimonials_lead: "Words from people who have experienced Hila's care.",
+        t1_name: "Anna K.",
+        t1_role: "Patient",
+        t1_text: "Hila's treatments helped me relieve years of tension and improve my sleep. The sessions are gentle, professional and deeply relaxing.",
+        t2_name: "David R.",
+        t2_role: "Patient",
+        t2_text: "I came for chronic back pain and noticed real improvement after just a few visits. Highly recommended.",
+        t3_name: "Maya S.",
+        t3_role: "Patient",
+        t3_text: "The herbal consultation gave me a clear, natural path to better digestion and energy. Thank you, Hila!",
+        booking_title: "Book an Appointment",
+        booking_lead: "Send a request and Hila will get back to you to confirm.",
+        label_name: "Full name",
+        label_phone: "Phone number",
+        label_email: "Email",
+        label_date: "Preferred date",
+        label_message: "Message",
+        message_placeholder: "What would you like help with?",
+        submit_btn: "Request appointment",
+        form_note: "This form opens your email client. Update the email address inside the form settings with Hila's real email.",
+        booking_subject: "Appointment request from",
+        contact_title: "Contact",
+        email_label: "Email:",
+        phone_label: "Phone:",
+        address_label: "Address / clinic:",
+        email_value: "hila@example.com",
+        phone_value: "+00 000 000 0000",
+        address_value: "[Clinic address or city]",
+        footer: "© 2026 Hila Haimovich. All rights reserved."
+      },
+      ru: {
+        nav_about: "Обо мне",
+        nav_services: "Услуги",
+        nav_testimonials: "Отзывы",
+        nav_book: "Запись",
+        nav_contact: "Контакты",
+        hero_name: "Ила Хаймович",
+        hero_eyebrow: "Исцеление изнутри",
+        hero_tagline: "Терапевт китайской медицины — забота о теле и душе.",
+        hero_cta: "Записаться на приём",
+        about_title: "Обо мне",
+        about_lead: "Добро пожаловать в практику Илы Хаймович, терапевта китайской медицины.",
+        about_p1: "[Замените этот текст на биографию, образование, подход и философию Илы.]",
+        services_title: "Услуги",
+        services_lead: "Индивидуальные сеансы в традициях китайской медицины.",
+        svc_acu: "Иглоукалывание",
+        svc_acu_desc: "[Описание иглоукалывания и его пользы.]",
+        svc_herb: "Фитотерапия",
+        svc_herb_desc: "[Описание консультаций по травам и персональных рецептов.]",
+        svc_cup: "Банки и Туйна",
+        svc_cup_desc: "[Описание массажа и баночной терапии.]",
+        testimonials_title: "Что говорят клиенты",
+        testimonials_lead: "Отзывы тех, кто уже позаботился о себе с Илой.",
+        t1_name: "Анна К.",
+        t1_role: "Пациент",
+        t1_text: "После сеансов у Илы я избавилась от многолетнего напряжения и стала лучше спать. Очень бережный и профессиональный подход.",
+        t2_name: "Давид Р.",
+        t2_role: "Пациент",
+        t2_text: "Пришёл с хронической болью в спине. Уже после нескольких визитов почувствовал заметное облегчение. Рекомендую.",
+        t3_name: "Майя С.",
+        t3_role: "Пациент",
+        t3_text: "Фитоконсультация дала мне простой и естественный путь к лучшему пищеварению и бодрости. Спасибо, Ила!",
+        booking_title: "Записаться на приём",
+        booking_lead: "Оставьте заявку, и Ила свяжется с вами для подтверждения.",
+        label_name: "Имя",
+        label_phone: "Телефон",
+        label_email: "Email",
+        label_date: "Желаемая дата",
+        label_message: "Сообщение",
+        message_placeholder: "С чем вам нужна помощь?",
+        submit_btn: "Записаться",
+        form_note: "Эта форма откроет вашу почту. Замените адрес в настройках формы на настоящий email Илы.",
+        booking_subject: "Запись на приём от",
+        contact_title: "Контакты",
+        email_label: "Email:",
+        phone_label: "Телефон:",
+        address_label: "Адрес / клиника:",
+        email_value: "hila@example.com",
+        phone_value: "+00 000 000 0000",
+        address_value: "[Адрес клиники или город]",
+        footer: "© 2026 Ила Хаймович. Все права защищены."
+      },
+      he: {
+        nav_about: "אודות",
+        nav_services: "טיפולים",
+        nav_testimonials: "המלצות",
+        nav_book: "קביעת תור",
+        nav_contact: "צור קשר",
+        hero_name: "הילה חיימוביץ",
+        hero_eyebrow: "ריפוי מבפנים",
+        hero_tagline: "מטפלת ברפואה סינית — טיפול הוליסטי בגוף ובנפש.",
+        hero_cta: "קביעת תור",
+        about_title: "אודות הילה",
+        about_lead: "ברוכים הבאים למרפאתה של הילה חיימוביץ, מטפלת ברפואה סינית.",
+        about_p1: "[החליפו פסקה זו בביוגרפיה, הכשרה, גישה ופילוסופיה של הילה.]",
+        services_title: "טיפולים",
+        services_lead: "מפגשים מותאמים אישית.",
+        svc_acu: "דיקור סיני",
+        svc_acu_desc: "[תיאור של טיפול דיקור סיני והיתרונות שלו.]",
+        svc_herb: "צמחי מרפא",
+        svc_herb_desc: "[תיאור של ייעוץ צמחים ונוסחאות מותאמות אישית.]",
+        svc_cup: "כוסות רוח וטווינה",
+        svc_cup_desc: "[תיאור של טיפולי גוף מוצעים.]",
+        testimonials_title: "מה הלקוחות אומרים",
+        testimonials_lead: "דברים ממי שכבר זכו לטיפול של הילה.",
+        t1_name: "אנה ק.",
+        t1_role: "מטופלת",
+        t1_text: "הטיפולים של הילה עזרו לי להקל על מתח רב-שנתי ולשפר את השינה. המפגשים עדינים, מקצועיים ומאוד מרגיעים.",
+        t2_name: "דוד ר.",
+        t2_role: "מטופל",
+        t2_text: "פניתי בגלל כאב גב כרוני. כבר אחרי מספר ביקורים חשתי בשיפור משמעותי. ממליץ בחום.",
+        t3_name: "מאיה ש.",
+        t3_role: "מטופלת",
+        t3_text: "ייעוץ הצמחים נתן לי דרך טבעית וברורה לשיפור העיכול והאנרגיה. תודה, הילה!",
+        booking_title: "קביעת תור",
+        booking_lead: "שלחו בקשה והילה תחזור אליכם לאישור.",
+        label_name: "שם מלא",
+        label_phone: "טלפון",
+        label_email: "אימייל",
+        label_date: "תאריך מועדף",
+        label_message: "הודעה",
+        message_placeholder: "עם מה תרצו לקבל עזרה?",
+        submit_btn: "בקשת תור",
+        form_note: "טופס זה פותח את לקוח הדואר שלך. החליפו את כתובת האימייל בהגדרות הטופס לאימייל האמיתי של הילה.",
+        booking_subject: "בקשת תור מ-",
+        contact_title: "צור קשר",
+        email_label: "אימייל:",
+        phone_label: "טלפון:",
+        address_label: "כתובת / מרפאה:",
+        email_value: "hila@example.com",
+        phone_value: "+00 000 000 0000",
+        address_value: "[כתובת המרפאה או עיר]",
+        footer: "© 2026 הילה חיימוביץ. כל הזכויות שמורות."
+      }
+    };
+
+    function setLanguage(lang) {
+      const html = document.documentElement;
+      html.lang = lang;
+      html.dir = (lang === 'he') ? 'rtl' : 'ltr';
+      try { localStorage.setItem('hilaLang', lang); } catch (e) {}
+
+      const t = i18n[lang] || i18n.en;
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (t[key] !== undefined) el.textContent = t[key];
+      });
+
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.dataset.i18nPlaceholder;
+        if (t[key] !== undefined) el.placeholder = t[key];
+      });
+
+      document.querySelectorAll('.lang-switch button').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let saved = 'en';
+      try { saved = localStorage.getItem('hilaLang') || 'en'; } catch (e) {}
+      setLanguage(saved);
+
+      document.querySelectorAll('.lang-switch button').forEach(btn => {
+        btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+      });
+    });
+
+    function sendBooking() {
+      const lang = document.documentElement.lang;
+      const t = i18n[lang] || i18n.en;
+      const to = 'hila@example.com'; // TODO: replace with Hila's real email
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const email = document.getElementById('email').value;
+      const date = document.getElementById('date').value;
+      const message = document.getElementById('message').value;
+
+      const subject = encodeURIComponent(t.booking_subject + ' ' + name);
+      const body = encodeURIComponent(
+        t.label_name + ': ' + name + '\n' +
+        t.label_phone + ': ' + phone + '\n' +
+        t.label_email + ': ' + email + '\n' +
+        t.label_date + ': ' + date + '\n\n' +
+        t.label_message + ':\n' + message
+      );
+
+      window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
+      return false;
+    }
+  </script>
+</body>
+</html>
